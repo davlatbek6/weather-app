@@ -1,0 +1,247 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  overflow-x: hidden;
+}
+
+h1,
+h3 {
+  font-weight: 400;
+}
+
+.weather-app {
+  min-height: 100vh;
+  width: 100vw;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #fff;
+  position: relative;
+  transition: 0.5s;
+  opacity: 1;
+}
+.weather-app::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 0;
+}
+
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 2em 3em 4em 3em;
+}
+.container > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 70px;
+}
+.container h1,
+.container .city-time,
+.container .weather {
+  margin: 0 1em;
+}
+.container .city-time h1 {
+  margin: 0;
+  margin-bottom: 0.2em;
+  font-size: 3em;
+}
+.container h1 {
+  font-size: 7em;
+  margin: 0;
+}
+.container .weather {
+  text-align: center;
+}
+.container .weather img {
+  display: block;
+}
+
+.panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  background: rgba(110, 110, 110, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  z-index: 1;
+  padding: 3em 2em;
+  padding-bottom: 0;
+  display: grid;
+  grid-template-rows: auto 1fr 1fr;
+}
+.panel input {
+  border: none;
+  background: none;
+  border-bottom: 1px #ccc solid;
+  width: 80%;
+  color: #fff;
+  font-size: 1.1em;
+  padding: 0 1em 0.5em 0;
+}
+.panel input:focus {
+  outline: none;
+}
+.panel input::placeholder {
+  color: #aaa;
+}
+.panel button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 1.43em;
+  border: none;
+  outline: none;
+  background: #fa6d1b;
+  color: #fff;
+  font-size: 1.2em;
+  transition: 0.4s;
+  cursor: pointer;
+}
+.panel button:hover {
+  background: #fff !important;
+  color: #000;
+}
+.panel ul {
+  padding: 0 0 1em 0;
+  margin: 2.5em 0;
+  border-bottom: 1px solid #ccc;
+}
+.panel ul:nth-child(2) {
+  overflow-y: scroll;
+}
+.panel ul:nth-child(2)::-webkit-scrollbar {
+  width: 5px;
+  background: transparent;
+}
+.panel ul:nth-child(2)::-webkit-scrollbar-thumb {
+  border-top: 50px solid #ccc;
+}
+.panel ul:nth-child(2) li:first-child {
+  margin-top: 0;
+}
+.panel ul:last-child li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.panel ul li {
+  color: #ccc;
+  margin: 2em 0;
+}
+.panel ul h4 {
+  margin: 3em 0;
+  margin-top: 0;
+}
+
+.city {
+  display: block;
+  cursor: pointer;
+}
+.city:hover {
+  color: #fff;
+}
+
+.loader {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  transition: opacity 0.75s, visibility 0.75s;
+}
+
+.loader::after {
+  content: "";
+  width: 100px;
+  height: 100px;
+  border: 10px solid #dddddd;
+  border-top-color: #333;
+  border-radius: 50%;
+  animation: loading 1s ease infinite;
+}
+
+@keyframes loading {
+  from {
+    transform: rotate(0turn);
+  }
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .container {
+    position: relative;
+  }
+  .panel {
+    top: auto;
+    left: 0;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    column-gap: 3rem;
+    height: 55%;
+  }
+  .panel form {
+    grid-column: span 2;
+  }
+  .weather img {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  html {
+    font-size: 13px;
+  }
+  .container h1 {
+    font-size: 4em;
+  }
+  .container > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .container > div .city-time {
+    margin: 0;
+  }
+  .container > div .city-time small {
+    font-size: 1.4rem;
+  }
+  .container .weather {
+    grid-row: 1/2;
+    grid-column: 2/3;
+  }
+  .container .weather img {
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 400px) {
+  .container small span {
+    font-size: 14px;
+  }
+}
